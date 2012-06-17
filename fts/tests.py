@@ -46,7 +46,7 @@ class PollsTest(LiveServerTestCase):
         self.assertIn('0 Polls', body.text)
 
         # She sees a link to 'add' a new poll, so she clicks it
-        new_poll_link = self.browser.find_element_by_link_text('Add poll')
+        new_poll_link = self.browser.find_element_by_link_text('Add Poll')
         new_poll_link.click()
 
         # She sees some input fields for "Question" and "Date published"
@@ -64,6 +64,14 @@ class PollsTest(LiveServerTestCase):
         date_field.send_keys('01/01/12')
         time_field = self.browser.find_element_by_name('pub_date_1')
         time_field.send_keys('00:00')
+
+         # She sees she can enter choices for the Poll.  She adds three
+        choice_1 = self.browser.find_element_by_name('choice_set-0-choice')
+        choice_1.send_keys('Very awesome')
+        choice_2 = self.browser.find_element_by_name('choice_set-1-choice')
+        choice_2.send_keys('Quite awesome')
+        choice_3 = self.browser.find_element_by_name('choice_set-2-choice')
+        choice_3.send_keys('Moderately awesome')
 
         # Gertrude clicks the save button
         save_button = self.browser.find_element_by_css_selector("input[value='Save']")
